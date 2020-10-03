@@ -1,7 +1,14 @@
 import React from "react";
 
 function CalendarHead(props) {
-  return <div className="CalendarHead">Calendar Head</div>;
+  return (
+    <div className="CalendarHead">
+      <p>Calendar Head</p>
+      <button onClick={props.onIncrement}>+</button>
+      <button onClick={props.onDecrement}>-</button>
+      <h2>{props.value}</h2>
+    </div>
+  );
 }
 
 function CalendarBody(props) {
@@ -16,7 +23,11 @@ function CalendarBody(props) {
 function Calendar(props) {
   return (
     <div className="CalendarContainer">
-      <CalendarHead date={"2020-10-02"} />
+      <CalendarHead
+        value={props.value}
+        onIncrement={props.onIncrement}
+        onDecrement={props.onDecrement}
+      />
       <CalendarBody date={"2020-10-02"} />
     </div>
   );
