@@ -16,8 +16,8 @@ function CalendarHead(props) {
 function CalendarBody(props) {
   return (
     <div className="CalendarBody">
+      {console.log("Calendar Body : ", props.firstDayOfWeek)}
       <p>Calendar Body</p>
-      <span>{props.date}</span>
     </div>
   );
 }
@@ -25,13 +25,12 @@ function CalendarBody(props) {
 function Calendar(props) {
   return (
     <div className="CalendarContainer">
-      {console.log(props.firstDayOfWeek)}
       <CalendarHead
         date={props.date}
         onNextMonth={props.onNextMonth}
         onPrevMonth={props.onPrevMonth}
       />
-      <CalendarBody date={"2020-10-02"} />
+      <CalendarBody date={props.date} firstDayOfWeek={props.firstDayOfWeek} />
     </div>
   );
 }
