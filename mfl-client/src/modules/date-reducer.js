@@ -1,5 +1,5 @@
-const NEXT_MONTH = "month-manager/NEXT_MONTH";
-const PREV_MONTH = "month-manager/PREV_MONTH";
+const NEXT_MONTH = "date-reducer/NEXT_MONTH";
+const PREV_MONTH = "date-reducer/PREV_MONTH";
 
 //ACTIONS
 export const next_month = () => ({ type: NEXT_MONTH });

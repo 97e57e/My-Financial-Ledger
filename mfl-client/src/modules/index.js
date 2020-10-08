@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import monthManager from "./month-manager";
+import monthManager from "./date-reducer";
 
 const rootReducer = combineReducers({
   monthManager,
