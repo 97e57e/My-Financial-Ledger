@@ -13,10 +13,10 @@ class CalendarContainer extends Component {
   };
 
   render() {
-    const { number } = this.props;
+    const { currentYear, currentMonth } = this.props;
     return (
       <Calendar
-        value={number}
+        date={ {currentYear, currentMonth} }
         onNextMonth={this.handleNextMonth}
         onPrevMonth={this.handlePrevMonth}
       />
@@ -25,7 +25,8 @@ class CalendarContainer extends Component {
 }
 
 const mapStateToProps = ({ monthManager }) => ({
-  number: monthManager.number,
+  currentYear: monthManager.currentYear,
+  currentMonth: monthManager.currentMonth,
 });
 
 const mapDispatchToProps = { next_month, prev_month };

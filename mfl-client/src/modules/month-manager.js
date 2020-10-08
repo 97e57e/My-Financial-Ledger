@@ -7,21 +7,35 @@ export const prev_month = () => ({ type: PREV_MONTH });
 
 //Reducer
 const initialState = {
-  number: 0,
+  currentYear: new Date().getFullYear(),
+  currentMonth: new Date().getMonth(),
 };
 
 function monthManager(state = initialState, action) {
+  let resultYear = state.currentYear;
+  let resultMonth = state.currentMonth;
+
   switch (action.type) {
     case NEXT_MONTH:
-      return {
-        number: state.number + 1,
-      };
+      resultMonth = state.currentMonth + 1
+      break
     case PREV_MONTH:
-      return {
-        number: state.number - 1,
-      };
-    default:
-      return state;
+      resultMonth = state.currentMonth - 1
+      break
+  }
+
+  if (resultMonth > 12) {
+    resultMonth = 1;
+    resultYear++;
+  } else if (resultMonth < 1) {
+    resultMonth = 12;
+    resultYear--;
+  }
+
+  return {
+    ...state,
+    currentMonth: resultMonth,
+    currentYear: resultYear,
   }
 }
 
