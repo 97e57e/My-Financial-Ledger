@@ -8,10 +8,17 @@ export const prev_month = () => ({ type: PREV_MONTH });
 //Reducer
 const initialState = {
   currentYear: new Date().getFullYear(),
-  currentMonth: new Date().getMonth(),
+  currentMonth: new Date().getMonth() + 1,
+  currentDay: new Date().getDay(),
+  firstDayOfWeek: getFirstDayOfWeek(new Date().getFullYear(), new Date().getMonth())
 };
 
-function monthManager(state = initialState, action) {
+function getFirstDayOfWeek(year, month) {
+  return new Date(year.toString() + "-" + month.toString() + "-1").getDay()
+  
+}
+
+function dateReducer(state = initialState, action) {
   let resultYear = state.currentYear;
   let resultMonth = state.currentMonth;
 
@@ -36,7 +43,8 @@ function monthManager(state = initialState, action) {
     ...state,
     currentMonth: resultMonth,
     currentYear: resultYear,
+    firstDayOfWeek: getFirstDayOfWeek(resultYear, resultMonth)
   }
 }
 
-export default monthManager;
+export default dateReducer;

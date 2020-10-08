@@ -25,6 +25,7 @@ function CalendarBody(props) {
 function Calendar(props) {
   return (
     <div className="CalendarContainer">
+      {console.log(props.firstDayOfWeek)}
       <CalendarHead
         date={props.date}
         onNextMonth={props.onNextMonth}
