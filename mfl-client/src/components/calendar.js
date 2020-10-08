@@ -4,8 +4,8 @@ function CalendarHead(props) {
   return (
     <div className="CalendarHead">
       <p>Calendar Head</p>
-      <button onClick={props.onIncrement}>+</button>
-      <button onClick={props.onDecrement}>-</button>
+      <button onClick={props.onNextMonth}>+</button>
+      <button onClick={props.onPrevMonth}>-</button>
       <h2>{props.value}</h2>
     </div>
   );
@@ -25,8 +25,8 @@ function Calendar(props) {
     <div className="CalendarContainer">
       <CalendarHead
         value={props.value}
-        onIncrement={props.onIncrement}
-        onDecrement={props.onDecrement}
+        onNextMonth={props.onNextMonth}
+        onPrevMonth={props.onPrevMonth}
       />
       <CalendarBody date={"2020-10-02"} />
     </div>

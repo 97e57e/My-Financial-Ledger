@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Calendar from "../components/calendar";
-import { increment, decrement } from "../modules/counter";
+import { next_month, prev_month } from "../modules/month-manager";
 
 class CalendarContainer extends Component {
-  handleIncrement = () => {
-    this.props.increment();
+  handleNextMonth = () => {
+    this.props.next_month();
   };
 
-  handleDecrement = () => {
-    this.props.decrement();
+  handlePrevMonth = () => {
+    this.props.prev_month();
   };
 
   render() {
@@ -17,17 +17,17 @@ class CalendarContainer extends Component {
     return (
       <Calendar
         value={number}
-        onIncrement={this.handleIncrement}
-        onDecrement={this.handleDecrement}
+        onNextMonth={this.handleNextMonth}
+        onPrevMonth={this.handlePrevMonth}
       />
     );
   }
 }
 
-const mapStateToProps = ({ counter }) => ({
-  number: counter.number,
+const mapStateToProps = ({ monthManager }) => ({
+  number: monthManager.number,
 });
 
-const mapDispatchToProps = { increment, decrement };
+const mapDispatchToProps = { next_month, prev_month };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarContainer);
