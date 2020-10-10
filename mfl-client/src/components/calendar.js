@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/scss/components/calendar.scss";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
@@ -21,6 +22,45 @@ function CalendarHead(props) {
   );
 }
 
+function CaledarBodyDayOfWeek({ day }) {
+  return <div>{dayOfWeekEn[day]}</div>;
+}
+
+function makeBodyHead() {
+  const bodyHead = [];
+  for (let i = 0; i < 7; i++) {
+    bodyHead.push(<CaledarBodyDayOfWeek key={i} day={i} />);
+  }
+  return bodyHead;
+}
+
+function makeBody(props) {
+  const { currentYear, currentMonth } = props.date;
+  const fisrtDay = new Date(
+    currentYear.toString() + "-" + currentMonth.toString() + "-1"
+  ).getDay();
+
+  const body = [];
+  for (let week = 0; week < 5; week++) {
+    body.push(
+      <div className="row" key={week}>
+        {Array(7)
+          .fill(0)
+          .map((n, i) => {
+            return (
+              <div className="day-box" key={i}>
+                <div>
+                  {week + i} : {dayOfWeekKo[i]}
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    );
+  }
+  return body;
+}
+
 function CalendarBody(props) {
   return (
     <div className="CalendarBody">
@@ -28,6 +68,8 @@ function CalendarBody(props) {
       <p>
         {dayOfWeekEn[props.firstDayOfWeek]}({dayOfWeekKo[props.firstDayOfWeek]})
       </p>
+      <div className="row">{makeBodyHead()}</div>
+      {makeBody(props)}
     </div>
   );
 }

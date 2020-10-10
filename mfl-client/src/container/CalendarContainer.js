@@ -15,9 +15,8 @@ class CalendarContainer extends Component {
   render() {
     const { currentYear, currentMonth, firstDayOfWeek } = this.props;
     return (
-      console.log(firstDayOfWeek),
       <Calendar
-        date={ {currentYear, currentMonth} }
+        date={{ currentYear, currentMonth }}
         firstDayOfWeek={firstDayOfWeek}
         onNextMonth={this.handleNextMonth}
         onPrevMonth={this.handlePrevMonth}
