@@ -42,11 +42,6 @@ function makeBody(props) {
   ).getDay();
 
   const body = [];
-  body.push(
-    <div key={"key"}>
-      <span>1 일은 {dayOfWeekKo[fisrtDay]}요일</span>
-    </div>
-  );
 
   for (let week = 0; week < 5; week++) {
     body.push(
@@ -55,7 +50,6 @@ function makeBody(props) {
           .fill(0)
           .map((n, i) => {
             const current = i + week * 7 - fisrtDay + 1;
-            console.log(current);
             if (current > 0 && lastDayOfMonth[currentMonth - 1] >= current) {
               return (
                 <div className="day-box" key={i}>
