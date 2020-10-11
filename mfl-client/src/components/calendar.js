@@ -3,6 +3,7 @@ import "../assets/scss/components/calendar.scss";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
+const lastDayOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function CalendarHead(props) {
   return (
@@ -23,7 +24,7 @@ function CalendarHead(props) {
 }
 
 function CaledarBodyDayOfWeek({ day }) {
-  return <div>{dayOfWeekEn[day]}</div>;
+  return <div className="day-box">{dayOfWeekEn[day]}</div>;
 }
 
 function makeBodyHead() {
@@ -41,19 +42,36 @@ function makeBody(props) {
   ).getDay();
 
   const body = [];
+  body.push(
+    <div key={"key"}>
+      <span>1 일은 {dayOfWeekKo[fisrtDay]}요일</span>
+    </div>
+  );
+
   for (let week = 0; week < 5; week++) {
     body.push(
       <div className="row" key={week}>
         {Array(7)
           .fill(0)
           .map((n, i) => {
-            return (
-              <div className="day-box" key={i}>
-                <div>
-                  {week + i} : {dayOfWeekKo[i]}
+            const current = i + week * 7 - fisrtDay + 1;
+            console.log(current);
+            if (current > 0 && lastDayOfMonth[currentMonth - 1] >= current) {
+              return (
+                <div className="day-box" key={i}>
+                  <div>
+                    <span>{current}</span>
+                    <br></br>i : {dayOfWeekKo[i]}
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            } else {
+              return (
+                <div className="day-box" key={i}>
+                  <div></div>
+                </div>
+              );
+            }
           })}
       </div>
     );
