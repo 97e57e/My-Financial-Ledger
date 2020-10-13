@@ -13,12 +13,11 @@ class CalendarContainer extends Component {
   };
 
   render() {
-    const { currentYear, currentMonth, firstDayOfWeek } = this.props;
+    const { currentDate } = this.props;
     return (
       <div className="calendarContainer">
         <Calendar
-          date={{ currentYear, currentMonth }}
-          firstDayOfWeek={firstDayOfWeek}
+          currentDate={currentDate}
           onNextMonth={this.handleNextMonth}
           onPrevMonth={this.handlePrevMonth}
         />
@@ -28,9 +27,7 @@ class CalendarContainer extends Component {
 }
 
 const mapStateToProps = ({ dateReducer }) => ({
-  currentYear: dateReducer.currentYear,
-  currentMonth: dateReducer.currentMonth,
-  firstDayOfWeek: dateReducer.firstDayOfWeek,
+  currentDate: dateReducer.currentDate,
 });
 
 const mapDispatchToProps = { next_month, prev_month };

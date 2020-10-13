@@ -1,12 +1,13 @@
 import React from "react";
 import "../assets/scss/components/calendar.scss";
-import { getLastDayOfMonth } from "../utils/calendarUtils";
-import { getWeeksInMonth } from "date-fns";
+import { getWeeksInMonth, lastDayOfMonth, startOfMonth } from "date-fns";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
 
 function CalendarHead(props) {
+  const date = props.date;
+
   return (
     <div
       className="calendarHead"
@@ -18,30 +19,17 @@ function CalendarHead(props) {
       <button onClick={props.onNextMonth}>+</button>
       <button onClick={props.onPrevMonth}>-</button>
       <h2>
-        {props.date.currentYear}.{props.date.currentMonth}
+        {date.getFullYear()}.{date.getMonth() + 1}.{date.getDate()}
       </h2>
     </div>
   );
 }
 
-function CaledarBodyDayOfWeek({ day }) {
-  return <div className="dayBox">{dayOfWeekEn[day]}</div>;
-}
-
-function makeBodyHead() {
-  const bodyHead = [];
-  for (let i = 0; i < 7; i++) {
-    bodyHead.push(<CaledarBodyDayOfWeek key={i} day={i} />);
-  }
-  return bodyHead;
-}
-
 function makeBody(props) {
-  const { currentYear, currentMonth } = props.date;
-  const fisrtDay = new Date(
-    currentYear.toString() + "-" + currentMonth.toString() + "-1"
-  ).getDay();
-  const weeks = getWeeksInMonth(new Date(currentYear, currentMonth - 1));
+  const date = props.date;
+  const firstDay = startOfMonth(date).getDay();
+  const weeks = getWeeksInMonth(date);
+  const lastDay = lastDayOfMonth(date).getDate();
 
   const body = [];
 
@@ -51,16 +39,14 @@ function makeBody(props) {
         {Array(7)
           .fill(0)
           .map((n, i) => {
-            const current = i + week * 7 - fisrtDay + 1;
-            if (
-              current > 0 &&
-              getLastDayOfMonth(currentYear, currentMonth) >= current
-            ) {
+            const day = i + week * 7 - firstDay + 1;
+            if (day > 0 && lastDay >= day) {
               return (
                 <div className="dayBox" key={i}>
                   <div>
-                    <span>{current}</span>
-                    <br></br>i : {dayOfWeekKo[i]}
+                    {dayOfWeekKo[i]}
+                    <br></br>
+                    {day}
                   </div>
                 </div>
               );
@@ -81,9 +67,14 @@ function makeBody(props) {
 function CalendarBody(props) {
   return (
     <div className="calendarBody">
-      <p>Calendar Body</p>
+      <div className="row">
+        {Array(7)
+          .fill(0)
+          .map((n, i) => {
+            return <div className="dayBox">{dayOfWeekEn[i]}</div>;
+          })}
+      </div>
 
-      <div className="row">{makeBodyHead()}</div>
       {makeBody(props)}
     </div>
   );
@@ -92,12 +83,13 @@ function CalendarBody(props) {
 function Calendar(props) {
   return (
     <div className="calendar">
+      {console.log(props)}
       <CalendarHead
-        date={props.date}
+        date={props.currentDate}
         onNextMonth={props.onNextMonth}
         onPrevMonth={props.onPrevMonth}
       />
-      <CalendarBody date={props.date} />
+      <CalendarBody date={props.currentDate} />
     </div>
   );
 }
