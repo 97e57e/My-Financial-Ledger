@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Calendar from "../components/calendar";
+import Calendar from "../components/Calendar";
 import { next_month, prev_month } from "../modules/date-reducer";
 
 class CalendarContainer extends Component {

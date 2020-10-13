@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/scss/components/calendar.scss";
-import { getLastDayOfMonth } from "../utils/calendar-utils";
+import { getLastDayOfMonth } from "../utils/calendarUtils";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
