@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/scss/components/calendar.scss";
 import { getLastDayOfMonth } from "../utils/calendarUtils";
+import { getWeeksInMonth } from "date-fns";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
@@ -40,10 +41,11 @@ function makeBody(props) {
   const fisrtDay = new Date(
     currentYear.toString() + "-" + currentMonth.toString() + "-1"
   ).getDay();
+  const weeks = getWeeksInMonth(new Date(currentYear, currentMonth - 1));
 
   const body = [];
 
-  for (let week = 0; week < 6; week++) {
+  for (let week = 0; week < weeks; week++) {
     body.push(
       <div className="row" key={week}>
         {Array(7)
