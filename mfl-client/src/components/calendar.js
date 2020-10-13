@@ -8,7 +8,7 @@ const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
 function CalendarHead(props) {
   return (
     <div
-      className="CalendarHead"
+      className="calendarHead"
       style={{
         border: "1px solid black",
       }}
@@ -24,7 +24,7 @@ function CalendarHead(props) {
 }
 
 function CaledarBodyDayOfWeek({ day }) {
-  return <div className="day-box">{dayOfWeekEn[day]}</div>;
+  return <div className="dayBox">{dayOfWeekEn[day]}</div>;
 }
 
 function makeBodyHead() {
@@ -55,7 +55,7 @@ function makeBody(props) {
               getLastDayOfMonth(currentYear, currentMonth) >= current
             ) {
               return (
-                <div className="day-box" key={i}>
+                <div className="dayBox" key={i}>
                   <div>
                     <span>{current}</span>
                     <br></br>i : {dayOfWeekKo[i]}
@@ -64,7 +64,7 @@ function makeBody(props) {
               );
             } else {
               return (
-                <div className="day-box" key={i}>
+                <div className="dayBox" key={i}>
                   <div></div>
                 </div>
               );
@@ -78,11 +78,9 @@ function makeBody(props) {
 
 function CalendarBody(props) {
   return (
-    <div className="CalendarBody">
+    <div className="calendarBody">
       <p>Calendar Body</p>
-      <p>
-        {dayOfWeekEn[props.firstDayOfWeek]}({dayOfWeekKo[props.firstDayOfWeek]})
-      </p>
+
       <div className="row">{makeBodyHead()}</div>
       {makeBody(props)}
     </div>
@@ -91,13 +89,13 @@ function CalendarBody(props) {
 
 function Calendar(props) {
   return (
-    <div className="CalendarContainer">
+    <div className="calendar">
       <CalendarHead
         date={props.date}
         onNextMonth={props.onNextMonth}
         onPrevMonth={props.onPrevMonth}
       />
-      <CalendarBody date={props.date} firstDayOfWeek={props.firstDayOfWeek} />
+      <CalendarBody date={props.date} />
     </div>
   );
 }

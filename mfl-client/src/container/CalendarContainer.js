@@ -15,12 +15,14 @@ class CalendarContainer extends Component {
   render() {
     const { currentYear, currentMonth, firstDayOfWeek } = this.props;
     return (
-      <Calendar
-        date={{ currentYear, currentMonth }}
-        firstDayOfWeek={firstDayOfWeek}
-        onNextMonth={this.handleNextMonth}
-        onPrevMonth={this.handlePrevMonth}
-      />
+      <div className="calendarContainer">
+        <Calendar
+          date={{ currentYear, currentMonth }}
+          firstDayOfWeek={firstDayOfWeek}
+          onNextMonth={this.handleNextMonth}
+          onPrevMonth={this.handlePrevMonth}
+        />
+      </div>
     );
   }
 }

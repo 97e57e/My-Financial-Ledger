@@ -1,7 +1,11 @@
-.CalendarBody {
+.calendar {
+  margin: 10px;
+}
+
+.calendarBody {
   .row {
     display: flex;
-    .day-box {
+    .dayBox {
       position: relative;
       display: inline-flex;
       width: calc(100% / 7);
