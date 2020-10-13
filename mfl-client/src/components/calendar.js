@@ -15,11 +15,10 @@ function CalendarHead(props) {
         border: "1px solid black",
       }}
     >
-      <p>Calendar Head</p>
       <button onClick={props.onNextMonth}>+</button>
       <button onClick={props.onPrevMonth}>-</button>
       <h2>
-        {date.getFullYear()}.{date.getMonth() + 1}.{date.getDate()}
+        {date.getFullYear()}.{date.getMonth() + 1}
       </h2>
     </div>
   );
@@ -32,6 +31,7 @@ function makeBody(props) {
   const lastDay = lastDayOfMonth(date).getDate();
 
   const body = [];
+  const hello = "h";
 
   for (let week = 0; week < weeks; week++) {
     body.push(
@@ -42,7 +42,7 @@ function makeBody(props) {
             const day = i + week * 7 - firstDay + 1;
             if (day > 0 && lastDay >= day) {
               return (
-                <div className="dayBox" key={i}>
+                <div className={`box dateBox ${"day" + i}`} key={i}>
                   <div>
                     {dayOfWeekKo[i]}
                     <br></br>
@@ -52,7 +52,7 @@ function makeBody(props) {
               );
             } else {
               return (
-                <div className="dayBox" key={i}>
+                <div className="box dateBox" key={i}>
                   <div></div>
                 </div>
               );
@@ -71,7 +71,11 @@ function CalendarBody(props) {
         {Array(7)
           .fill(0)
           .map((n, i) => {
-            return <div className="dayBox">{dayOfWeekEn[i]}</div>;
+            return (
+              <div className={`box ${"day" + i}`} key={i}>
+                {dayOfWeekEn[i]}
+              </div>
+            );
           })}
       </div>
 
@@ -83,7 +87,6 @@ function CalendarBody(props) {
 function Calendar(props) {
   return (
     <div className="calendar">
-      {console.log(props)}
       <CalendarHead
         date={props.currentDate}
         onNextMonth={props.onNextMonth}
