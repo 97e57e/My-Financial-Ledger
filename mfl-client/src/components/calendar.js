@@ -1,9 +1,9 @@
 import React from "react";
 import "../assets/scss/components/calendar.scss";
+import { getLastDayOfMonth } from "../utils/calendar-utils";
 
 const dayOfWeekEn = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const dayOfWeekKo = ["일", "월", "화", "수", "목", "금", "토"];
-const lastDayOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 function CalendarHead(props) {
   return (
@@ -43,14 +43,17 @@ function makeBody(props) {
 
   const body = [];
 
-  for (let week = 0; week < 5; week++) {
+  for (let week = 0; week < 6; week++) {
     body.push(
       <div className="row" key={week}>
         {Array(7)
           .fill(0)
           .map((n, i) => {
             const current = i + week * 7 - fisrtDay + 1;
-            if (current > 0 && lastDayOfMonth[currentMonth - 1] >= current) {
+            if (
+              current > 0 &&
+              getLastDayOfMonth(currentYear, currentMonth) >= current
+            ) {
               return (
                 <div className="day-box" key={i}>
                   <div>
