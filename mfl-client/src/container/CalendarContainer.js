@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Calendar from "../components/Calendar";
 import { next_month, prev_month } from "../modules/date-reducer";
 
+import "../assets/scss/container/calendarContainer.scss";
+
 class CalendarContainer extends Component {
   handleNextMonth = () => {
     this.props.next_month();

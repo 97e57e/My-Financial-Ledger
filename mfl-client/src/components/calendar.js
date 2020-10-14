@@ -9,17 +9,18 @@ function CalendarHead(props) {
   const date = props.date;
 
   return (
-    <div
-      className="calendarHead"
-      style={{
-        border: "1px solid black",
-      }}
-    >
-      <button onClick={props.onNextMonth}>+</button>
-      <button onClick={props.onPrevMonth}>-</button>
-      <h2>
-        {date.getFullYear()}.{date.getMonth() + 1}
-      </h2>
+    <div className="calendarHead">
+      <div className="headItem headButtonArea">
+        <button onClick={props.onPrevMonth}>-</button>
+      </div>
+      <div className="headItem">
+        <h2>
+          {date.getFullYear()}.{date.getMonth() + 1}
+        </h2>
+      </div>
+      <div className="headItem headButtonArea">
+        <button onClick={props.onNextMonth}>+</button>
+      </div>
     </div>
   );
 }
