@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 로그인 페이지를 제외한 모든 페이지는 권한이 필요.
+     * */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
