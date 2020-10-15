@@ -4,11 +4,24 @@
 
 - 프론트는 잘 못해서... 오래 걸릴것 같다. 언제쯤 가계부를 쓸 수 있을까?
 
+---
+
 - 예상 스택
 
-  - spring
-  - mongodb
-  - react
+## Front
+
+- react
+
+## Back
+
+- spring boot
+- jpa
+
+## DB
+
+- mariaDB
+
+---
 
 - 혼자쓰는 가계부에 뭔 백엔드? (그냥...)
 
