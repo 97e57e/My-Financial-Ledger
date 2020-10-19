@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Builder
@@ -20,6 +21,8 @@ public class CustomUser implements UserDetails {
     private String password;
 
     private String nickName;
+
+    private LocalDateTime createdAt;
 
     @Override
     public String getPassword() {
@@ -46,6 +49,7 @@ public class CustomUser implements UserDetails {
                 .username(username)
                 .password(password)
                 .nickName(nickName)
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 
