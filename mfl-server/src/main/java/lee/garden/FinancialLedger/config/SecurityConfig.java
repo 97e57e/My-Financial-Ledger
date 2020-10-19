@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String API_VERSION = "/api/v1";
+
     /**
      * 로그인 페이지를 제외한 모든 페이지는 권한이 필요.
      * */
@@ -17,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/login").permitAll()
+                    .antMatchers(API_VERSION + "/login", API_VERSION + "/signup").permitAll()
                     .anyRequest().authenticated();
     }
 
