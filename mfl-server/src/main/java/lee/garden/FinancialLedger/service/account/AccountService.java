@@ -10,10 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
 
+@Transactional
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -21,7 +23,7 @@ public class AccountService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
-
+    
     public Long signUp(SignUpDTO signUpDTO) {
 
         CustomUser user = CustomUser.createUser(
