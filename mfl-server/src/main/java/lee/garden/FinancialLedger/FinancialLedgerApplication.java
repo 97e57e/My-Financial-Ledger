@@ -9,7 +9,8 @@ public class FinancialLedgerApplication {
 	private static final String PROPERTIES =
 			"spring.config.location="
 					+"classpath:/application.yml"
-					+",classpath:/application-db.yml";
+					+",classpath:/application-db.yml"
+			        +",classpath:/application-key.yml";
 
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(FinancialLedgerApplication.class)

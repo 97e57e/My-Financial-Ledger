@@ -1,9 +1,11 @@
 package lee.garden.FinancialLedger.service.account;
 
 import lee.garden.FinancialLedger.domain.account.CustomUser;
+import lee.garden.FinancialLedger.dto.account.LogInDTO;
 import lee.garden.FinancialLedger.dto.account.SignUpDTO;
 import lee.garden.FinancialLedger.repository.account.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class AccountService implements UserDetailsService {
@@ -30,8 +33,19 @@ public class AccountService implements UserDetailsService {
         return accountRepository.save(user).getId();
     }
 
+
+    public CustomUser signIn(LogInDTO logInDTO) throws Exception {
+        CustomUser user = accountRepository.findByUsername(logInDTO.getUsername()).orElseThrow(EntityNotFoundException::new);
+
+        if(!passwordEncoder.matches(logInDTO.getPassword(), user.getPassword())) {
+            throw new Exception();
+        }
+
+        return user;
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String userId) {
-        return accountRepository.findById(Long.valueOf(userId)).orElseThrow(EntityNotFoundException::new);
+    public UserDetails loadUserByUsername(String username) {
+        return accountRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
     }
 }
