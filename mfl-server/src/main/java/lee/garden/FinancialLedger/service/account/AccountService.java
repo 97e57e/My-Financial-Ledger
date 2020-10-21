@@ -1,5 +1,6 @@
 package lee.garden.FinancialLedger.service.account;
 
+import lee.garden.FinancialLedger.common.error.exception.account.LogInFailedException;
 import lee.garden.FinancialLedger.domain.account.CustomUser;
 import lee.garden.FinancialLedger.dto.account.LogInDTO;
 import lee.garden.FinancialLedger.dto.account.SignUpDTO;
@@ -23,7 +24,7 @@ public class AccountService implements UserDetailsService {
 
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
-    
+
     public Long signUp(SignUpDTO signUpDTO) {
 
         CustomUser user = CustomUser.createUser(
@@ -40,7 +41,7 @@ public class AccountService implements UserDetailsService {
         CustomUser user = accountRepository.findByUsername(logInDTO.getUsername()).orElseThrow(EntityNotFoundException::new);
 
         if(!passwordEncoder.matches(logInDTO.getPassword(), user.getPassword())) {
-            throw new Exception();
+            throw new LogInFailedException("로그인에 실패했습니다.");
         }
 
         return user;
