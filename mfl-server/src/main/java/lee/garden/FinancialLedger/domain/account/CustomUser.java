@@ -1,5 +1,6 @@
 package lee.garden.FinancialLedger.domain.account;
 
+import lee.garden.FinancialLedger.domain.calendar.UserCalendar;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,9 @@ public class CustomUser implements UserDetails {
     private String nickName;
 
     private LocalDateTime createdAt;
+
+    @OneToOne(mappedBy = "user")
+    private UserCalendar calendar;
 
     @Override
     public String getPassword() {
