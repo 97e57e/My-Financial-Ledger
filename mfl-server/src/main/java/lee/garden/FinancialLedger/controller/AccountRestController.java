@@ -26,8 +26,10 @@ public class AccountRestController {
     }
 
     @PostMapping("/api/v1/signup")
-    public Long signUp(@RequestBody SignUpDTO signUpDTO) {
-        return accountService.signUp(signUpDTO);
+    public ResponseEntity<Map<String, Boolean>> signUp(@RequestBody SignUpDTO signUpDTO) {
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("success", accountService.signUp(signUpDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/api/v1/login")

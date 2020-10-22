@@ -25,15 +25,16 @@ public class AccountService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
 
-    public Long signUp(SignUpDTO signUpDTO) {
+    public boolean signUp(SignUpDTO signUpDTO) {
 
         CustomUser user = CustomUser.createUser(
                 signUpDTO.getUsername(),
                 passwordEncoder.encode(signUpDTO.getPassword()),
                 signUpDTO.getNickname()
         );
+        accountRepository.save(user);
 
-        return accountRepository.save(user).getId();
+        return true;
     }
 
 

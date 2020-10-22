@@ -25,25 +25,26 @@ public class AccountServiceTest {
         SignUpDTO signUpDTO = new SignUpDTO("khjvvv7@gmail.com", "rkemsWKd123", "가든");
 
         //when
-        Long userId = accountService.signUp(signUpDTO);
+        boolean result = accountService.signUp(signUpDTO);
 
         //then
-        assertEquals(Long.valueOf(1), userId);
+        assertEquals(true, result);
     }
 
     @Transactional
     @Test
     public void 로그인_성공 () throws Exception {
         //given
-        SignUpDTO signUpDTO = new SignUpDTO("khjvvv7@gmail.com", "rkemsWKd123", "가든");
-        Long userId = accountService.signUp(signUpDTO);
+        String username = "khjvvv7@gmail.com";
+        SignUpDTO signUpDTO = new SignUpDTO(username, "rkemsWKd123", "가든");
+        accountService.signUp(signUpDTO);
 
         //when
         LogInDTO logInDTO = new LogInDTO("khjvvv7@gmail.com", "rkemsWKd123");
         CustomUser findUser = accountService.signIn(logInDTO);
 
         //then
-        assertEquals(userId, findUser.getId());
+        assertEquals(username, findUser.getUsername());
     }
 
     /**
@@ -54,12 +55,11 @@ public class AccountServiceTest {
     public void 로그인_실패 () throws Exception {
         //given
         SignUpDTO signUpDTO = new SignUpDTO("khjvvv7@gmail.com", "rkemsWKd123", "가든");
-        Long userId = accountService.signUp(signUpDTO);
+        accountService.signUp(signUpDTO);
 
         //when
         LogInDTO logInDTO = new LogInDTO("khjvvv7@gmail.com", "1234");
         accountService.signIn(logInDTO);
     }
-
 
 }
