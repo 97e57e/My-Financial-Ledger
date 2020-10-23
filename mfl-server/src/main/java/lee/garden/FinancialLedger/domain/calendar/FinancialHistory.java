@@ -1,5 +1,6 @@
 package lee.garden.FinancialLedger.domain.calendar;
 
+import lee.garden.FinancialLedger.common.enumConverter.AssetTypeConverter;
 import lee.garden.FinancialLedger.common.enumConverter.FinancialActionTypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class FinancialHistory {
     @Convert(converter = FinancialActionTypeConverter.class)
     private FinancialActionType actionType;
 
-    @Convert(converter = AssetType.class)
+    @Convert(converter = AssetTypeConverter.class)
     private AssetType assetType;
 
     private String category;
