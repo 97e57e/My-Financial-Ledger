@@ -3,6 +3,7 @@ package lee.garden.FinancialLedger.domain.calendar;
 import lee.garden.FinancialLedger.common.enumConverter.AssetTypeConverter;
 import lee.garden.FinancialLedger.common.enumConverter.FinancialActionTypeConverter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
 @Entity
 public class FinancialHistory {
@@ -29,5 +31,19 @@ public class FinancialHistory {
     private String category;
 
     private int amount;
+
+    /**
+     * 생성 메서드
+     * */
+    public static FinancialHistory createHistory(LocalDateTime date, FinancialActionType action, AssetType asset,
+                                                 String category, int amount) {
+        return FinancialHistory.builder()
+                .date(date)
+                .actionType(action)
+                .assetType(asset)
+                .category(category)
+                .amount(amount)
+                .build();
+    }
 
 }
